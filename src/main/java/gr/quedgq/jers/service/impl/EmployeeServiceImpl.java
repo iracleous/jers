@@ -41,4 +41,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public boolean deleteEmployee(int employeeId) {
         return employeeRepository.delete(employeeId);
     }
+
+    @Override
+    public boolean initializeDatabase() {
+        return employeeRepository.createTable();
+    }
 }

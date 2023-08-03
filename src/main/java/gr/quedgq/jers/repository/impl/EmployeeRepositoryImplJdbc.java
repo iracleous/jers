@@ -9,18 +9,22 @@ import javax.inject.Named;
 import java.sql.*;
 import java.util.Optional;
 
+import static java.lang.System.exit;
+
 
 public class EmployeeRepositoryImplJdbc implements EmployeeRepository {
 
-    private    static final String DB_URL = "jdbc:sqlserver://localhost;databaseName=athTechCompany;encrypt=true;trustServerCertificate=true;";
-    private  static final String USER = "sa";
-    private  static final String PASS = "passw0rd";
+    private    static final String DB_URL = "jdbc:sqlserver://codehub-jers.database.windows.net;databaseName=codehub-jers;encrypt=true;trustServerCertificate=true;";
+    private  static final String USER = "CodeHubber123";
+    private  static final String PASS = "P@ssw0rd1234";
+//    private    static final String DB_URL = "jdbc:sqlserver://localhost;databaseName=codehub-jers;encrypt=true;trustServerCertificate=true;";
+//    private  static final String USER = "sa";
+//    private  static final String PASS = "P@ssword1234";
     private static final String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
 
     @Override
     public void save(Employee employee) {
-
 
         try {
             Class.forName(JDBC_DRIVER);
@@ -81,5 +85,26 @@ public class EmployeeRepositoryImplJdbc implements EmployeeRepository {
     @Override
     public boolean delete(int employeeId) {
         return false;
+    }
+
+    public boolean createTable() {
+        try {
+            Class.forName(JDBC_DRIVER);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("Initializing database...");
+        String createCustomerTableSql = "CREATE TABLE EMPLOYEE (" +
+                "id BIGINT IDENTITY(1,1) PRIMARY KEY, " +
+                "name VARCHAR(50) NOT NULL " +
+                ");";
+        try (Statement statement = DriverManager.getConnection(DB_URL, USER, PASS).createStatement()) {
+            int result = statement.executeUpdate(createCustomerTableSql);
+            System.out.println(result);
+        } catch (SQLException e) {
+            System.out.println("Error while creating database: " + e.getMessage());
+            exit(-1);
+        }
+        return true;
     }
 }

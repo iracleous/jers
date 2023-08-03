@@ -7,4 +7,6 @@ public interface EmployeeService {
     EmployeeDto  readEmployee(int id);
     EmployeeDto  updateEmployee(int employeeId, EmployeeDto employeeDto);
     boolean deleteEmployee(int employeeId);
+
+    boolean initializeDatabase();
 }

@@ -12,4 +12,6 @@ public interface EmployeeRepository {
     Optional<Employee> update(int employeeId, Employee employee);
 
     boolean delete(int employeeId);
+
+    boolean createTable();
 }

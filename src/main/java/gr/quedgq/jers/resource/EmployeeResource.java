@@ -33,5 +33,13 @@ public class EmployeeResource {
         return employeeService.saveEmployee(employee);
     }
 
+    @Path("/initializeDatabase")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public boolean initializeDatabase() {
+        return employeeService.initializeDatabase();
+    }
+
 
 }

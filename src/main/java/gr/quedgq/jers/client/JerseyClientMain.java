@@ -16,7 +16,6 @@ public class JerseyClientMain {
     public static void main(String[] args) {
     //    testPost();
         testGet();
-
     }
 
     static void testPost() {
